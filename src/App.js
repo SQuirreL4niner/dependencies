@@ -12,7 +12,7 @@ class App extends Component {
     return (
         <Router>
           <Switch>
-            <Route exact path='/' component={Dependency}/>
+            <Route exact path='/build/' component={Dependency}/>
             <Route path='/test' component={DependencyTest}/>
           </Switch>
         </Router>

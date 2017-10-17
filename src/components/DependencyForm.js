@@ -8,13 +8,17 @@ import TextField from 'material-ui/TextField';
 import DependencyTest from '../components/DependencyTest';
 import Dependency from '../components/Dependency';
 
+const array = [];
 class DependencyForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       fieldVal: "",
-      fieldVal2: ""
+      fieldVal2: "",
+      array: [{
+        fieldVal: "",
+        fieldVal2: "",
+      }]
     }
   }
 
@@ -28,22 +32,38 @@ class DependencyForm extends Component {
     this.setState({fieldVal2: e.target.value})
   }
 
+  handleClick = (e) => {
+    array.push({fieldVal:this.state.fieldVal, fieldVal2:this.state.fieldVal2});
+    this.props.onUpdateObject(array);
+    this.setState({array:array});
+    
+    //array.push()
+    //console.log(array)
+    //})
+    //DependencyForm.array.push(this.state.fieldVal);
+    //console.log(DependencyForm.array);
+  }
+
   render() {
     return (
       <div>
         <h4>Child</h4>
-        <input
-          type="text"
-          placeholder="type here"
-          onChange={this.updateParent}
-          value={this.state.fieldVal}
-        />
-        <input
-          type="text"
-          placeholder="type here"
-          onChange={this.updateChild}
-          value={this.state.fieldVal2}
-        />
+        <MuiThemeProvider>
+              <TextField
+                type="text"
+                placeholder="type here"
+                onChange={this.updateParent}
+                value={this.state.fieldVal}
+              />
+              <TextField
+                type="text"
+                placeholder="type here"
+                onChange={this.updateChild}
+                value={this.state.fieldVal2}
+              />
+              <RaisedButton label="Enter Dependencies" style={style} primary={true} style={style}
+                          onClick={(event) => this.handleClick(event)}/>
+      </MuiThemeProvider>
       </div>
     )
   }

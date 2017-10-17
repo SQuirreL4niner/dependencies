@@ -14,12 +14,37 @@ class DependencyTest extends Component {
   };
 
   handleClick = (event) => {
-    console.log(this.state.checkDependency)
-    var flag = false;
-    //for(this.props.passsedChild)
-    if(this.props.passedParent.includes(this.state.checkDependency)){
-      console.log('there')
-    }else console.log('not there')
+    //console.log(this.state.checkDependency);
+    //console.log('hmmm' + JSON.stringify(this.props.passedObject));
+    let array = [];
+    this.props.passedObject[0].forEach((iter, index) => {
+      if(iter.fieldVal == this.state.checkDependency){
+        array = iter.fieldVal2.split(" ").map((item) => item.trim());
+        // console.log(array);
+        // array.splice(index, 1);
+        // console.log('after splicing the array ' + array)
+        return search(array);
+      } else return search(iter.fieldVal2.split(" ").map((item) => item.trim()));
+        function search(results){
+          for(let parse of iter.fieldVal){
+            if(array.includes(parse)){
+              var temp = iter.fieldVal2.split(" ").map((item) => item.trim())
+              array = array.concat(temp);
+            } else console.log('done');
+          }
+      }
+    })
+    var i = array.indexOf(this.state.checkDependency);
+    if(i != -1) {
+    	array.splice(i, 1);
+    }
+    var mySet = new Set(array);
+    mySet.forEach(function(value) {
+      console.log(value);
+    });
+    // if(this.props.passedParent.includes(this.state.checkDependency)){
+    //   //console.log('there')
+    // }else console.log('not there')
   };
 
   updateCheckDepdendency = (val) => {
@@ -47,5 +72,5 @@ export default DependencyTest;
 
 
 const style= {
-  margin: 100
+
 };

@@ -9,7 +9,11 @@ class Dependency extends React.Component {
 
     this.state = {
       fieldVal: "",
-      fieldVal2: ""
+      fieldVal2: "",
+      array: [{
+        fieldVal: "",
+        fieldVal2: "",
+      }]
     }
   }
 
@@ -25,20 +29,27 @@ class Dependency extends React.Component {
     })
   };
 
+  onUpdateObject = (val) => {
+    this.setState({
+      array: [val]
+    })
+    console.log(this.state.array);
+  };
+
   render() {
     return (
       <div>
-        <h2>Parent</h2>
+        {/* <h2>Parent</h2>
         Value in Parent Component State: {this.state.fieldVal}
         <br/>
         <br/>
         <h2>Child</h2>
-        Value in Child Component State: {this.state.fieldVal2}
+        Value in Child Component State: {this.state.fieldVal2} */}
         <br/>
         <br/>
-        <DependencyForm style={style} onUpdateParent={this.onUpdateParent} onUpdateChild={this.onUpdateChild}/>
+        <DependencyForm style={style} onUpdateObject={this.onUpdateObject} onUpdateParent={this.onUpdateParent} onUpdateChild={this.onUpdateChild}/>
         <br />
-        <DependencyTest style={style} passedParent={this.state.fieldVal} passedChild={this.state.fieldVal2} />
+        <DependencyTest style={style} passedObject={this.state.array} passedParent={this.state.fieldVal} passedChild={this.state.fieldVal2} />
       </div>
     )
   }
