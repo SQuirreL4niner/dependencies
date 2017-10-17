@@ -39,12 +39,6 @@ class Dependency extends React.Component {
   render() {
     return (
       <div>
-        {/* <h2>Parent</h2>
-        Value in Parent Component State: {this.state.fieldVal}
-        <br/>
-        <br/>
-        <h2>Child</h2>
-        Value in Child Component State: {this.state.fieldVal2} */}
         <br/>
         <br/>
         <DependencyForm style={style} onUpdateObject={this.onUpdateObject} onUpdateParent={this.onUpdateParent} onUpdateChild={this.onUpdateChild}/>

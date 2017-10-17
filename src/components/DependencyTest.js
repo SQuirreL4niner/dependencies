@@ -9,20 +9,16 @@ class DependencyTest extends Component {
     super(props);
 
     this.state = {
-      checkDependency: ''
+      checkDependency: '',
+      array: []
     }
   };
 
   handleClick = (event) => {
-    //console.log(this.state.checkDependency);
-    //console.log('hmmm' + JSON.stringify(this.props.passedObject));
     let array = [];
     this.props.passedObject[0].forEach((iter, index) => {
       if(iter.fieldVal == this.state.checkDependency){
         array = iter.fieldVal2.split(" ").map((item) => item.trim());
-        // console.log(array);
-        // array.splice(index, 1);
-        // console.log('after splicing the array ' + array)
         return search(array);
       } else return search(iter.fieldVal2.split(" ").map((item) => item.trim()));
         function search(results){
@@ -39,18 +35,12 @@ class DependencyTest extends Component {
     	array.splice(i, 1);
     }
     var mySet = new Set(array);
-    mySet.forEach(function(value) {
-      console.log(value);
-    });
-    // if(this.props.passedParent.includes(this.state.checkDependency)){
-    //   //console.log('there')
-    // }else console.log('not there')
+    this.setState({array:Array.from(mySet)});
   };
 
   updateCheckDepdendency = (val) => {
-    //this.props.onUpdateChild(e.target.value);
-    this.setState({checkDependency: val.target.value})
-    console.log(this.state.checkDependency)
+    this.setState({checkDependency: val.target.value});
+    console.log(this.state.checkDependency);
   }
 
   render() {
@@ -60,8 +50,15 @@ class DependencyTest extends Component {
           <br/><br/>
           <TextField type="text" hintText="Result" style={style} floatingLabelText="Result"
           value={this.state.checkDependency} onChange={this.updateCheckDepdendency}/>
-          <RaisedButton label="Check Dependencies" style={style} primary={true} style={style}
+          <RaisedButton label="Check Dependencies" primary={true} style={style}
                       onClick={(event) => this.handleClick(event)}/>
+          <br/><br/>
+          <h2>Dependencies for {this.state.checkDependency}</h2>
+          <ul>
+            {this.state.array.map(function(name, index){
+                return <li key={ index }>{name}</li>;
+              })}
+          </ul>
         </MuiThemeProvider>
       </div>
     )
@@ -72,5 +69,5 @@ export default DependencyTest;
 
 
 const style= {
-
+  margin: 45
 };

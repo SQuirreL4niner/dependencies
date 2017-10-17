@@ -36,26 +36,21 @@ class DependencyForm extends Component {
     array.push({fieldVal:this.state.fieldVal, fieldVal2:this.state.fieldVal2});
     this.props.onUpdateObject(array);
     this.setState({array:array});
-    
-    //array.push()
-    //console.log(array)
-    //})
-    //DependencyForm.array.push(this.state.fieldVal);
-    //console.log(DependencyForm.array);
   }
 
   render() {
     return (
       <div>
-        <h4>Child</h4>
         <MuiThemeProvider>
               <TextField
+                style={style}
                 type="text"
                 placeholder="type here"
                 onChange={this.updateParent}
                 value={this.state.fieldVal}
               />
               <TextField
+                style={style}
                 type="text"
                 placeholder="type here"
                 onChange={this.updateChild}
